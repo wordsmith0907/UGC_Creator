@@ -123,7 +123,7 @@
   align-items: center;
   max-width: 840px;
   padding: 0 24px;
-  margin-bottom: clamp(44px, 6.5vh, 68px);
+  margin-bottom: 8px;
   position: relative;
   z-index: 20;
 }
@@ -162,7 +162,9 @@
 }
 
 .hero-cta-wrap {
-  margin-top: 28px;
+  margin-top: 24px;
+  position: relative;
+  z-index: 30;
 }
 
 .hero-cta {
@@ -178,7 +180,9 @@
   text-decoration: none;
   border: 1px solid var(--foreground);
   border-radius: 9999px;
-  background: transparent;
+  background: color-mix(in oklch, var(--background) 90%, transparent);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: pointer;
 }
@@ -208,7 +212,7 @@
 
 .ringview-ring {
   position: relative;
-  top: -16px;
+  top: -42px;
   width: 0;
   height: 0;
   transform-style: preserve-3d;
