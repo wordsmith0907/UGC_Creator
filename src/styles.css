@@ -171,7 +171,7 @@
 
 .ringview-ring {
   position: relative;
-  top: 72px;
+  top: 120px;
   width: 0;
   height: 0;
   transform-style: preserve-3d;
@@ -267,8 +267,8 @@
 }
 
 .about {
-  background: var(--ring-panel-0);
-  color: var(--primary-foreground);
+  background: var(--background);
+  color: var(--foreground);
   padding: clamp(96px, 14vw, 176px) clamp(24px, 8vw, 128px);
 }
 
