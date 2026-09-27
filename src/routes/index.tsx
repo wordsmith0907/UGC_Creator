@@ -105,6 +105,7 @@ function RingView() {
 
   return (
     <>
+      <p className="hero-eyebrow">UGC Creator · Beauty · Lifestyle · Food</p>
       <header className="site-nav">
         <a className="site-nav-brand" href="#work">
           AUREA BIAZON
@@ -126,19 +127,6 @@ function RingView() {
         onPointerCancel={onPointerEnd}
         onLostPointerCapture={onPointerEnd}
       >
-        <div className="hero-content">
-          <p className="hero-eyebrow">UGC Creator · Beauty · Lifestyle · Food</p>
-          <h1 className="hero-heading">
-            Beautifully real.<br />Naturally engaging.
-          </h1>
-          <p className="hero-subheading">
-            Authentic UGC and visual storytelling for beauty, lifestyle and food brands.
-          </p>
-          <a href="#about" className="hero-cta">
-            View My Work <span aria-hidden="true">&rarr;</span>
-          </a>
-        </div>
-
         <div className="ringview-ring" ref={ringRef}>
           {Array.from({ length: panelCount }, (_, index) => {
             const asset = assets[index % assets.length] ?? "/ringview/0.jpg";
