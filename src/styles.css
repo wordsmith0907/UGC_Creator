@@ -153,8 +153,8 @@
 
 .ringview {
   width: 100%;
-  height: 100vh;
-  height: 100dvh;
+  height: 120vh;
+  height: 120dvh;
   display: flex;
   align-items: center;
   justify-content: center;
