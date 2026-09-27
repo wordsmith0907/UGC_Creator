@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, type PointerEvent } from "react";
 
-const panelWidth = 300;
-const panelGap = 8;
+const panelWidth = 360;
+const panelGap = 10;
 const panelCount = 16;
 const radius = (panelCount * (panelWidth + panelGap)) / (2 * Math.PI);
 const autoRotateDegreesPerSecond = 12;
