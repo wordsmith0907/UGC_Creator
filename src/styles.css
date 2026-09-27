@@ -212,14 +212,14 @@
   cursor: grab;
   user-select: none;
   touch-action: none;
-  margin-top: -6px;
+  margin-top: 10px;
 }
 
 .ringview:active { cursor: grabbing; }
 
 .ringview-ring {
   position: relative;
-  top: -46px;
+  top: -16px;
   width: 0;
   height: 0;
   transform-style: preserve-3d;
