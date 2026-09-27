@@ -105,7 +105,6 @@ function RingView() {
 
   return (
     <>
-      <p className="hero-eyebrow">UGC Creator · Beauty · Lifestyle · Food</p>
       <header className="site-nav">
         <a className="site-nav-brand" href="#work">
           AUREA BIAZON
@@ -117,44 +116,62 @@ function RingView() {
           <a href="#contact">Contact</a>
         </nav>
       </header>
-      <main
-        id="work"
-        className="ringview"
-        aria-label="Rotating fashion carousel"
-        onPointerDown={onPointerDown}
-        onPointerMove={onPointerMove}
-        onPointerUp={onPointerEnd}
-        onPointerCancel={onPointerEnd}
-        onLostPointerCapture={onPointerEnd}
-      >
-        <div className="ringview-ring" ref={ringRef}>
-          {Array.from({ length: panelCount }, (_, index) => {
-            const asset = assets[index % assets.length] ?? "/ringview/0.jpg";
-            const isVideo = index % 2 === 1;
-            const poster = posters[Math.floor((index % assets.length) / 2)] ?? "/ringview/1-poster.jpg";
-            return (
-              <div
-                className={`ringview-panel ringview-panel-${index % assets.length}`}
-                style={{ transform: `rotateY(${index * 22.5}deg) translateZ(-${radius}px)` }}
-                key={index}
-                aria-hidden="true"
-              >
-                {isVideo ? (
-                  <video
-                    src={asset}
-                    poster={poster}
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    preload="auto"
-                  />
-                ) : (
-                  <img src={asset} alt="" draggable={false} />
-                )}
-              </div>
-            );
-          })}
+
+      <main id="work" className="hero-experience">
+        <div className="hero-copy-block">
+          <p className="hero-eyebrow">UGC CREATOR · BEAUTY · LIFESTYLE · FOOD</p>
+          <h1 className="hero-heading">
+            <span>Beautifully real.</span>
+            <span>Naturally engaging.</span>
+          </h1>
+          <p className="hero-subheadline">
+            Authentic UGC and visual storytelling for beauty, lifestyle and food brands.
+          </p>
+          <div className="hero-cta-wrap">
+            <a href="#about" className="hero-cta">
+              View My Work →
+            </a>
+          </div>
+        </div>
+
+        <div
+          className="ringview"
+          aria-label="Rotating fashion carousel"
+          onPointerDown={onPointerDown}
+          onPointerMove={onPointerMove}
+          onPointerUp={onPointerEnd}
+          onPointerCancel={onPointerEnd}
+          onLostPointerCapture={onPointerEnd}
+        >
+          <div className="ringview-ring" ref={ringRef}>
+            {Array.from({ length: panelCount }, (_, index) => {
+              const asset = assets[index % assets.length] ?? "/ringview/0.jpg";
+              const isVideo = index % 2 === 1;
+              const poster = posters[Math.floor((index % assets.length) / 2)] ?? "/ringview/1-poster.jpg";
+              return (
+                <div
+                  className={`ringview-panel ringview-panel-${index % assets.length}`}
+                  style={{ transform: `rotateY(${index * 22.5}deg) translateZ(-${radius}px)` }}
+                  key={index}
+                  aria-hidden="true"
+                >
+                  {isVideo ? (
+                    <video
+                      src={asset}
+                      poster={poster}
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      preload="auto"
+                    />
+                  ) : (
+                    <img src={asset} alt="" draggable={false} />
+                  )}
+                </div>
+              );
+            })}
+          </div>
         </div>
       </main>
       <section className="about" id="about" aria-labelledby="about-heading">
