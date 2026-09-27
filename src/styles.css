@@ -121,9 +121,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 840px;
+  max-width: 860px;
   padding: 0 24px;
-  margin-bottom: 8px;
+  margin-bottom: 0px;
   position: relative;
   z-index: 20;
 }
@@ -156,9 +156,15 @@
   font-weight: 300;
   line-height: 1.6;
   color: var(--muted-foreground);
-  max-width: 490px;
+  max-width: 780px;
   margin-top: 18px;
   margin-bottom: 0;
+}
+
+@media (min-width: 768px) {
+  .hero-subheadline {
+    white-space: nowrap;
+  }
 }
 
 .hero-cta-wrap {
@@ -206,13 +212,14 @@
   cursor: grab;
   user-select: none;
   touch-action: none;
+  margin-top: -6px;
 }
 
 .ringview:active { cursor: grabbing; }
 
 .ringview-ring {
   position: relative;
-  top: -42px;
+  top: -46px;
   width: 0;
   height: 0;
   transform-style: preserve-3d;
