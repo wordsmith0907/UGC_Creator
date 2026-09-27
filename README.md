@@ -1,29 +1,39 @@
-# Welcome to your Lovable project
+# UGC Creator - RingView Portfolio
 
-This project was built with [Lovable](https://lovable.dev).
+An interactive 3D rotating cylindrical carousel portfolio for UGC creators, fashion imagery, and video content.
 
-## Build with Lovable
+## 🚀 Features
 
-Open your project in the [Lovable editor](https://lovable.dev) and keep building.
+- **3D RingView Carousel:** Smooth rotating inside-out cylinder built with 3D CSS transforms and inertia decay physics.
+- **Embedded Media:** Fluid auto-playing video reels and high-resolution still photography.
+- **Touch & Mouse Gesture Support:** Drag to spin with momentum and inertial release.
+- **Fast & Modern Stack:** TanStack Start, React 19, Tailwind CSS, TypeScript.
 
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: connect the project to GitHub and every change made in Lovable is committed straight to your repository.
-- **Full ownership**: this code is yours. Push to your repository and your changes sync back into Lovable, ready for your next prompt.
+## 🛠️ Getting Started
 
-## Development
+### Prerequisites
 
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
+- Node.js (v18+)
+- npm or bun
 
-```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
+### Installation
+
+```bash
+git clone https://github.com/wordsmith0907/UGC_Creator.git
+cd UGC_Creator
+npm install
+```
+
+### Run Locally
+
+```bash
 npm run dev
 ```
 
-## Built with
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-- TanStack Start
-- TypeScript
-- React
-- Tailwind CSS
+### Build for Production
+
+```bash
+npm run build
+```

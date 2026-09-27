@@ -1,19 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, type PointerEvent } from "react";
 
-import photo0 from "../assets/ringview/0.jpg.asset.json";
-import video1 from "../assets/ringview/1.mp4.asset.json";
-import poster1 from "../assets/ringview/1-poster.jpg.asset.json";
-import photo2 from "../assets/ringview/2.jpg.asset.json";
-import video3 from "../assets/ringview/3.mp4.asset.json";
-import poster3 from "../assets/ringview/3-poster.jpg.asset.json";
-import photo4 from "../assets/ringview/4.jpg.asset.json";
-import video5 from "../assets/ringview/5.mp4.asset.json";
-import poster5 from "../assets/ringview/5-poster.jpg.asset.json";
-import photo6 from "../assets/ringview/6.jpg.asset.json";
-import video7 from "../assets/ringview/7.mp4.asset.json";
-import poster7 from "../assets/ringview/7-poster.jpg.asset.json";
-
 const panelWidth = 300;
 const panelGap = 8;
 const panelCount = 16;
@@ -22,8 +9,23 @@ const autoRotateDegreesPerSecond = 12;
 const dragSensitivity = 0.25;
 const inertiaFrictionPerFrame = 0.94;
 const inertiaStopVelocity = 0.05;
-const assets = [photo0, video1, photo2, video3, photo4, video5, photo6, video7];
-const posters = [poster1, poster3, poster5, poster7];
+
+const assets = [
+  "/ringview/0.jpg",
+  "/ringview/1.mp4",
+  "/ringview/2.jpg",
+  "/ringview/3.mp4",
+  "/ringview/4.jpg",
+  "/ringview/5.mp4",
+  "/ringview/6.jpg",
+  "/ringview/7.mp4",
+];
+const posters = [
+  "/ringview/1-poster.jpg",
+  "/ringview/3-poster.jpg",
+  "/ringview/5-poster.jpg",
+  "/ringview/7-poster.jpg",
+];
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -127,8 +129,9 @@ function RingView() {
       >
         <div className="ringview-ring" ref={ringRef}>
           {Array.from({ length: panelCount }, (_, index) => {
-            const asset = assets[index % assets.length] ?? photo0;
+            const asset = assets[index % assets.length] ?? "/ringview/0.jpg";
             const isVideo = index % 2 === 1;
+            const poster = posters[Math.floor((index % assets.length) / 2)] ?? "/ringview/1-poster.jpg";
             return (
               <div
                 className={`ringview-panel ringview-panel-${index % assets.length}`}
@@ -138,8 +141,8 @@ function RingView() {
               >
                 {isVideo ? (
                   <video
-                    src={asset.url}
-                    poster={(posters[Math.floor((index % assets.length) / 2)] ?? poster1).url}
+                    src={asset}
+                    poster={poster}
                     autoPlay
                     muted
                     loop
@@ -147,7 +150,7 @@ function RingView() {
                     preload="auto"
                   />
                 ) : (
-                  <img src={asset.url} alt="" draggable={false} />
+                  <img src={asset} alt="" draggable={false} />
                 )}
               </div>
             );
