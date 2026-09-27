@@ -27,6 +27,63 @@ const posters = [
   "/ringview/7-poster.jpg",
 ];
 
+// =========================================================================
+// BRAND LOGOS (Temporary Placeholders)
+// 👉 SWAP REAL BRAND LOGO URLs HERE:
+// Each array represents one row with 9 brand logos.
+// Replace any image URL below with your actual brand logo image/SVG path.
+// =========================================================================
+const brandLogoRows: string[][] = [
+  // Row 1 (9 logos - scrolls right to left)
+  [
+    "/ringview/0.jpg",
+    "/ringview/1-poster.jpg",
+    "/ringview/2.jpg",
+    "/ringview/3-poster.jpg",
+    "/ringview/4.jpg",
+    "/ringview/5-poster.jpg",
+    "/ringview/6.jpg",
+    "/ringview/7-poster.jpg",
+    "/ringview/0.jpg",
+  ],
+  // Row 2 (9 logos - scrolls left to right)
+  [
+    "/ringview/2.jpg",
+    "/ringview/3-poster.jpg",
+    "/ringview/4.jpg",
+    "/ringview/5-poster.jpg",
+    "/ringview/6.jpg",
+    "/ringview/7-poster.jpg",
+    "/ringview/0.jpg",
+    "/ringview/1-poster.jpg",
+    "/ringview/2.jpg",
+  ],
+  // Row 3 (9 logos - scrolls right to left)
+  [
+    "/ringview/4.jpg",
+    "/ringview/5-poster.jpg",
+    "/ringview/6.jpg",
+    "/ringview/7-poster.jpg",
+    "/ringview/0.jpg",
+    "/ringview/1-poster.jpg",
+    "/ringview/2.jpg",
+    "/ringview/3-poster.jpg",
+    "/ringview/4.jpg",
+  ],
+  // Row 4 (9 logos - scrolls left to right)
+  [
+    "/ringview/6.jpg",
+    "/ringview/7-poster.jpg",
+    "/ringview/0.jpg",
+    "/ringview/1-poster.jpg",
+    "/ringview/2.jpg",
+    "/ringview/3-poster.jpg",
+    "/ringview/4.jpg",
+    "/ringview/5-poster.jpg",
+    "/ringview/6.jpg",
+  ],
+];
+
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
@@ -103,6 +160,34 @@ function RingView() {
     dragging.current = false;
   };
 
+  const onRowMouseEnter = (event: React.MouseEvent<HTMLDivElement>) => {
+    const track = event.currentTarget.querySelector<HTMLElement>(".brands-track");
+    if (track) {
+      const animations = track.getAnimations();
+      animations.forEach((anim) => {
+        if ("updatePlaybackRate" in anim) {
+          anim.updatePlaybackRate(0.7);
+        } else {
+          anim.playbackRate = 0.7;
+        }
+      });
+    }
+  };
+
+  const onRowMouseLeave = (event: React.MouseEvent<HTMLDivElement>) => {
+    const track = event.currentTarget.querySelector<HTMLElement>(".brands-track");
+    if (track) {
+      const animations = track.getAnimations();
+      animations.forEach((anim) => {
+        if ("updatePlaybackRate" in anim) {
+          anim.updatePlaybackRate(1);
+        } else {
+          anim.playbackRate = 1;
+        }
+      });
+    }
+  };
+
   return (
     <>
       <header className="site-nav">
@@ -174,6 +259,55 @@ function RingView() {
           </div>
         </div>
       </main>
+
+      {/* Brands I've Worked With Section */}
+      <section className="brands-section" aria-label="Brands I've Worked With">
+        <div className="brands-header">
+          <p className="brands-eyebrow">BRANDS I'VE WORKED WITH</p>
+        </div>
+        <div className="brands-grid">
+          {brandLogoRows.map((row, rowIndex) => {
+            const isLeft = rowIndex % 2 === 0;
+            return (
+              <div
+                className="brands-row"
+                key={rowIndex}
+                onMouseEnter={onRowMouseEnter}
+                onMouseLeave={onRowMouseLeave}
+              >
+                <div
+                  className={`brands-track ${
+                    isLeft ? "brands-track-left" : "brands-track-right"
+                  }`}
+                >
+                  {[0, 1, 2, 3].map((groupIndex) => (
+                    <div
+                      className="brands-group"
+                      key={groupIndex}
+                      aria-hidden={groupIndex > 0 ? "true" : undefined}
+                    >
+                      {row.map((logoSrc, logoIndex) => (
+                        <div
+                          className="brand-badge"
+                          key={`logo-${rowIndex}-${groupIndex}-${logoIndex}`}
+                        >
+                          <img
+                            src={logoSrc}
+                            alt=""
+                            loading="lazy"
+                            draggable={false}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
       <section className="about" id="about" aria-labelledby="about-heading">
         <div className="about-inner">
           <div className="about-intro">
