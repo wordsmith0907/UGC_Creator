@@ -133,6 +133,36 @@ export const workProjects: WorkProject[] = [
     isPlaceholder: true,
     source: "Pexels / Monstera Production",
   },
+  {
+    id: "work-07",
+    number: "07",
+    title: "Morning Rituals",
+    category: "Food & Beverage",
+    description:
+      "Inviting textures, warm steam, and thoughtful coffee table aesthetics.",
+    image:
+      "https://images.pexels.com/photos/302899/pexels-photo-302899.jpeg?auto=compress&cs=tinysrgb&w=800",
+    video: "/ringview/3.mp4",
+    poster: "/ringview/3-poster.jpg",
+    alt: "Pour-over coffee in warm ambient morning sunlight",
+    isPlaceholder: true,
+    source: "Pexels / Chevanon Photography",
+  },
+  {
+    id: "work-08",
+    number: "08",
+    title: "Warm Minimal",
+    category: "Beauty · Self-Care",
+    description:
+      "Clean visual narratives centered on daily nourishment and mindful routines.",
+    image:
+      "https://images.pexels.com/photos/3785147/pexels-photo-3785147.jpeg?auto=compress&cs=tinysrgb&w=800",
+    video: "/ringview/5.mp4",
+    poster: "/ringview/5-poster.jpg",
+    alt: "Clean beauty serum droplets on glass dish with natural highlights",
+    isPlaceholder: true,
+    source: "Pexels / Karolina Kaboompics",
+  },
 ];
 
 // =============================================================================

@@ -154,7 +154,6 @@ function ProjectCard({
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <div className="sw-card-number">{project.number}</div>
       <div
         className="sw-card-media"
         onClick={() => onOpen(project)}
@@ -702,7 +701,6 @@ function HomePage() {
         <div className="sw-mobile-track">
           {workProjects.map((project) => (
             <article className="sw-mobile-card" key={project.id}>
-              <div className="sw-card-number">{project.number}</div>
               <div
                 className="sw-card-media"
                 onClick={() => openLightbox(project)}
