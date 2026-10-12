@@ -640,20 +640,15 @@ function HomePage() {
         <div className="sw-sticky">
           {/* Header */}
           <div className="sw-header">
-            <div className="sw-header-left">
-              <p className="sw-eyebrow">01 / SELECTED WORK</p>
-              <h2 className="sw-heading" id="sw-heading">
-                Stories in motion.
-              </h2>
-              <p className="sw-description reveal-on-scroll">
-                From everyday moments to memorable brand stories, explore
-                content created to capture attention and make genuine
-                connections.
-              </p>
-            </div>
-            <div className="sw-header-right">
-              <p className="sw-scroll-label">SCROLL TO EXPLORE ↓</p>
-            </div>
+            <p className="sw-eyebrow">SELECTED WORK</p>
+            <h2 className="sw-heading" id="sw-heading">
+              Stories in motion.
+            </h2>
+            <p className="sw-description reveal-on-scroll">
+              From everyday moments to memorable brand stories, explore
+              content created to capture attention and make genuine
+              connections.
+            </p>
           </div>
 
           {/* Project Track */}
@@ -691,7 +686,7 @@ function HomePage() {
       {/* Mobile swipe gallery (shown only < 768px) */}
       <section className="sw-mobile-section" aria-label="Selected Work Gallery">
         <div className="sw-mobile-header">
-          <p className="sw-eyebrow">01 / SELECTED WORK</p>
+          <p className="sw-eyebrow">SELECTED WORK</p>
           <h2 className="sw-heading">Stories in motion.</h2>
           <p className="sw-description">
             From everyday moments to memorable brand stories, explore content

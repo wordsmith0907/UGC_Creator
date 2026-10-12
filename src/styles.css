@@ -489,21 +489,13 @@
 
 .sw-header {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
   padding: 0 clamp(24px, 5vw, 64px);
   margin-bottom: clamp(20px, 2.5vh, 32px);
   flex-shrink: 0;
-}
-
-.sw-header-left {
-  max-width: 600px;
-}
-
-.sw-header-right {
-  display: flex;
-  align-items: flex-end;
-  padding-top: 8px;
+  width: 100%;
 }
 
 .sw-eyebrow {
@@ -513,6 +505,7 @@
   color: var(--muted-foreground);
   font-weight: 500;
   margin: 0 0 16px 0;
+  text-align: center;
 }
 
 .sw-heading {
@@ -523,6 +516,7 @@
   letter-spacing: -0.015em;
   color: var(--foreground);
   margin: 0 0 12px 0;
+  text-align: center;
 }
 
 .sw-description {
@@ -530,18 +524,9 @@
   font-weight: 300;
   line-height: 1.6;
   color: var(--muted-foreground);
-  max-width: 480px;
-  margin: 0;
-}
-
-.sw-scroll-label {
-  font-size: 0.6875rem;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  color: var(--muted-foreground);
-  font-weight: 500;
-  margin: 0;
-  white-space: nowrap;
+  max-width: 540px;
+  margin: 0 auto;
+  text-align: center;
 }
 
 /* Project Track */
@@ -767,6 +752,11 @@
 .sw-mobile-header {
   padding: 0 clamp(20px, 5vw, 32px);
   margin-bottom: 32px;
+  text-align: center;
+}
+
+.sw-mobile-header .sw-description {
+  margin: 0 auto;
 }
 
 .sw-mobile-track {
