@@ -12,6 +12,7 @@ import {
   services,
   type WorkProject,
 } from "../data/projects";
+import { EyeFollowCTA } from "../components/EyeFollowCTA";
 
 // =============================================================================
 // RING CAROUSEL CONSTANTS (Hero — DO NOT MODIFY)
@@ -943,16 +944,15 @@ function HomePage() {
           </div>
 
           <div className="services-rates reveal-on-scroll">
+            <p className="rates-eyebrow">HAVE SOMETHING IN MIND?</p>
             <h3 className="rates-heading">
-              Every collaboration is a little different.
+              Every great story starts somewhere.
             </h3>
             <p className="rates-body">
-              Have a project in mind? Let's talk about the content you need and
-              create an approach that fits your brand.
+              Have a project in mind? Let's create something thoughtful,
+              natural, and distinctly yours.
             </p>
-            <a href="#contact" className="rates-cta">
-              Enquire About Rates ↗
-            </a>
+            <EyeFollowCTA text="LET'S COLLABORATE" href="#contact" />
           </div>
         </div>
       </section>
