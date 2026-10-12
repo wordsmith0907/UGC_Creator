@@ -1008,7 +1008,7 @@ function HomePage() {
               <a href="#work">Work</a>
               <a href="#selected-work">Selected Work</a>
               <a href="#about">About</a>
-              <a href="#rates">Rates</a>
+              <a href="#rates">Services</a>
               <a href="#contact">Contact</a>
             </nav>
           </div>
