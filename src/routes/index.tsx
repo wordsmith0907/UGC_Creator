@@ -188,10 +188,6 @@ function ProjectCard({
                 draggable={false}
               />
             </div>
-            <div className="sw-card-badge">
-              <span className="sw-play-icon">▶</span>
-              <span>Preview</span>
-            </div>
           </>
         ) : (
           <img
@@ -201,9 +197,6 @@ function ProjectCard({
             draggable={false}
           />
         )}
-        <div className="sw-card-overlay">
-          <span className="sw-card-view">View ↗</span>
-        </div>
       </div>
       <div className="sw-card-info">
         <h3 className="sw-card-title">{project.title}</h3>
@@ -232,6 +225,7 @@ function HomePage() {
   // ---------------------------------------------------------------------------
   const workSectionRef = useRef<HTMLElement>(null);
   const workTrackRef = useRef<HTMLDivElement>(null);
+  const cursorRef = useRef<HTMLDivElement>(null);
   const [workProgress, setWorkProgress] = useState(0);
 
   // ---------------------------------------------------------------------------
@@ -338,6 +332,99 @@ function HomePage() {
       window.removeEventListener("resize", onScroll);
     };
   }, []);
+
+  // ---------------------------------------------------------------------------
+  // Selected Work — Custom editorial VIEW cursor (desktop only)
+  // ---------------------------------------------------------------------------
+  useEffect(() => {
+    const track = workTrackRef.current;
+    const cursor = cursorRef.current;
+    if (!track || !cursor) return;
+
+    const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    if (!finePointer.matches || reducedMotion.matches) return;
+
+    let rafId = 0;
+    let isHovering = false;
+    let targetX = -100;
+    let targetY = -100;
+    let currentX = -100;
+    let currentY = -100;
+
+    const render = () => {
+      currentX += (targetX - currentX) * 0.22;
+      currentY += (targetY - currentY) * 0.22;
+
+      if (cursor) {
+        cursor.style.transform = `translate3d(${currentX}px, ${currentY}px, 0) translate(-50%, -50%) scale(${
+          isHovering ? 1 : 0.4
+        })`;
+        cursor.style.opacity = isHovering ? "1" : "0";
+      }
+
+      rafId = requestAnimationFrame(render);
+    };
+
+    const updateHoverState = (
+      x: number,
+      y: number,
+      target?: EventTarget | null
+    ) => {
+      if (document.body.style.overflow === "hidden") {
+        isHovering = false;
+        return;
+      }
+      const el =
+        (target instanceof HTMLElement ? target : null) ||
+        document.elementFromPoint(x, y);
+      const cardMedia = el?.closest(".sw-card-media");
+      if (cardMedia && track.contains(cardMedia)) {
+        if (!isHovering) {
+          currentX = x;
+          currentY = y;
+          isHovering = true;
+        }
+      } else {
+        isHovering = false;
+      }
+    };
+
+    const onPointerMove = (e: globalThis.PointerEvent) => {
+      targetX = e.clientX;
+      targetY = e.clientY;
+      updateHoverState(targetX, targetY, e.target);
+    };
+
+    const onPointerLeave = () => {
+      isHovering = false;
+    };
+
+    const onScroll = () => {
+      if (targetX >= 0 && targetY >= 0) {
+        updateHoverState(targetX, targetY);
+      }
+    };
+
+    window.addEventListener("pointermove", onPointerMove, { passive: true });
+    document.addEventListener("pointerleave", onPointerLeave);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    rafId = requestAnimationFrame(render);
+
+    return () => {
+      window.removeEventListener("pointermove", onPointerMove);
+      document.removeEventListener("pointerleave", onPointerLeave);
+      window.removeEventListener("scroll", onScroll);
+      cancelAnimationFrame(rafId);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (activeProject && cursorRef.current) {
+      cursorRef.current.style.opacity = "0";
+    }
+  }, [activeProject]);
 
   // ---------------------------------------------------------------------------
   // Scroll-triggered reveal animations
@@ -715,15 +802,6 @@ function HomePage() {
                   loading="lazy"
                   draggable={false}
                 />
-                {project.video && (
-                  <div className="sw-card-badge">
-                    <span className="sw-play-icon">▶</span>
-                    <span>Video</span>
-                  </div>
-                )}
-                <div className="sw-card-overlay">
-                  <span className="sw-card-view">View ↗</span>
-                </div>
               </div>
               <div className="sw-card-info">
                 <h3 className="sw-card-title">{project.title}</h3>
@@ -1015,6 +1093,17 @@ function HomePage() {
           </a>
         </div>
       </footer>
+
+      {/* ================================================================== */}
+      {/* SELECTED WORK — Custom Editorial VIEW Cursor                        */}
+      {/* ================================================================== */}
+      <div
+        ref={cursorRef}
+        className="sw-custom-cursor"
+        aria-hidden="true"
+      >
+        <span>VIEW</span>
+      </div>
 
       {/* ================================================================== */}
       {/* VIDEO / IMAGE LIGHTBOX                                             */}
