@@ -894,7 +894,7 @@ function HomePage() {
       >
         <div className="services-inner">
           <div className="services-header reveal-on-scroll">
-            <p className="services-eyebrow">03 / WORK WITH ME</p>
+            <p className="services-eyebrow">WORK WITH ME</p>
             <h2 className="services-heading" id="services-h">
               The art of creating together.
             </h2>
