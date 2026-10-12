@@ -12,7 +12,11 @@ import {
   services,
   type WorkProject,
 } from "../data/projects";
-import { EyeFollowCTA } from "../components/EyeFollowCTA";
+import { EditorialContact } from "../components/EditorialContact";
+import {
+  ServiceVideoPreview,
+  type ServiceVideoPreviewItem,
+} from "../components/ServiceVideoPreview";
 
 // =============================================================================
 // RING CAROUSEL CONSTANTS (Hero — DO NOT MODIFY)
@@ -41,6 +45,30 @@ const posters = [
   "/ringview/3-poster.jpg",
   "/ringview/5-poster.jpg",
   "/ringview/7-poster.jpg",
+];
+
+// =============================================================================
+// SERVICES VIDEO PREVIEWS (3 Distinct Hero Video Assets)
+// =============================================================================
+const serviceVideoPreviews: ServiceVideoPreviewItem[] = [
+  {
+    id: "svc-01",
+    video: "/ringview/1.mp4",
+    poster: "/ringview/1-poster.jpg",
+    title: "UGC Video Creation",
+  },
+  {
+    id: "svc-02",
+    video: "/ringview/3.mp4",
+    poster: "/ringview/3-poster.jpg",
+    title: "Product & Lifestyle Photography",
+  },
+  {
+    id: "svc-03",
+    video: "/ringview/5.mp4",
+    poster: "/ringview/5-poster.jpg",
+    title: "Creative Content Packages",
+  },
 ];
 
 // =============================================================================
@@ -230,9 +258,12 @@ function HomePage() {
   const [workProgress, setWorkProgress] = useState(0);
 
   // ---------------------------------------------------------------------------
-  // Services accordion state
+  // Services accordion & floating video preview state
   // ---------------------------------------------------------------------------
   const [openService, setOpenService] = useState<string | null>(null);
+  const [hoveredService, setHoveredService] = useState<string | null>(null);
+  const [previewCursorOffset, setPreviewCursorOffset] = useState({ x: 0, y: 0 });
+  const serviceRowRefs = useRef<Record<string, HTMLElement | null>>({});
 
   // ---------------------------------------------------------------------------
   // Video / project lightbox state
@@ -552,27 +583,7 @@ function HomePage() {
     return () => window.removeEventListener("keydown", handleKey);
   }, [activeProject, closeLightbox]);
 
-  // ---------------------------------------------------------------------------
-  // Contact form state
-  // ---------------------------------------------------------------------------
-  const [formData, setFormData] = useState({
-    name: "",
-    brand: "",
-    email: "",
-    service: "",
-    message: "",
-  });
 
-  const handleFormSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const subject = encodeURIComponent(
-      `Collaboration Inquiry from ${formData.name}`
-    );
-    const body = encodeURIComponent(
-      `Name: ${formData.name}\nBrand: ${formData.brand}\nEmail: ${formData.email}\nService: ${formData.service}\n\nProject Details:\n${formData.message}`
-    );
-    window.location.href = `mailto:hello@aureabiazon.com?subject=${subject}&body=${body}`;
-  };
 
   // ===========================================================================
   // RENDER
@@ -910,6 +921,26 @@ function HomePage() {
               <div
                 className={`service-item ${openService === svc.id ? "service-item--open" : ""}`}
                 key={svc.id}
+                ref={(el) => {
+                  serviceRowRefs.current[svc.id] = el;
+                }}
+                onMouseEnter={() => {
+                  setHoveredService(svc.id);
+                }}
+                onMouseMove={(e) => {
+                  const target = e.currentTarget;
+                  const rect = target.getBoundingClientRect();
+                  const relativeX = (e.clientX - rect.left) / rect.width - 0.5;
+                  const relativeY = (e.clientY - rect.top) / rect.height - 0.5;
+                  setPreviewCursorOffset({
+                    x: Math.round(relativeX * 10),
+                    y: Math.round(relativeY * 10),
+                  });
+                }}
+                onMouseLeave={() => {
+                  setHoveredService((prev) => (prev === svc.id ? null : prev));
+                  setPreviewCursorOffset({ x: 0, y: 0 });
+                }}
               >
                 <button
                   className="service-trigger"
@@ -943,168 +974,144 @@ function HomePage() {
             ))}
           </div>
 
-          <div className="services-rates reveal-on-scroll">
-            <p className="rates-eyebrow">HAVE SOMETHING IN MIND?</p>
-            <h3 className="rates-heading">
-              Every great story starts somewhere.
-            </h3>
-            <p className="rates-body">
-              Have a project in mind? Let's create something thoughtful,
-              natural, and distinctly yours.
-            </p>
-            <EyeFollowCTA text="LET'S COLLABORATE" href="#contact" />
-          </div>
+          {/* Floating editorial video preview on hover (desktop only) */}
+          <ServiceVideoPreview
+            activeServiceId={hoveredService}
+            services={serviceVideoPreviews}
+            rowRefs={serviceRowRefs.current}
+            cursorOffset={previewCursorOffset}
+          />
         </div>
       </section>
 
       {/* ================================================================== */}
-      {/* CONTACT — The Final Invitation                                     */}
+      {/* THE EDITORIAL REVEAL — Unified Interactive Contact Experience      */}
       {/* ================================================================== */}
-      <section
-        className="contact-section"
-        id="contact"
-        aria-labelledby="contact-h"
-      >
-        <div className="contact-inner">
-          <div className="contact-copy">
-            <p className="contact-eyebrow reveal-on-scroll">
-              04 / THE NEXT STORY
-            </p>
-            <h2 className="contact-heading reveal-on-scroll" id="contact-h">
-              Something beautiful
-              <br />
-              starts here.
-            </h2>
-            <p className="contact-subtext reveal-on-scroll">
-              Have a brand, a vision, or an idea worth bringing to life? I'd
-              love to hear what you're dreaming up.
-            </p>
-          </div>
-
-          <form
-            className="contact-form reveal-on-scroll"
-            onSubmit={handleFormSubmit}
-          >
-            <div className="form-row">
-              <div className="form-field">
-                <label htmlFor="contact-name">Your name</label>
-                <input
-                  id="contact-name"
-                  type="text"
-                  required
-                  value={formData.name}
-                  onChange={(e) =>
-                    setFormData((p) => ({ ...p, name: e.target.value }))
-                  }
-                  placeholder="Jane Smith"
-                />
-              </div>
-              <div className="form-field">
-                <label htmlFor="contact-brand">Brand / company</label>
-                <input
-                  id="contact-brand"
-                  type="text"
-                  value={formData.brand}
-                  onChange={(e) =>
-                    setFormData((p) => ({ ...p, brand: e.target.value }))
-                  }
-                  placeholder="Your Brand"
-                />
-              </div>
-            </div>
-            <div className="form-row">
-              <div className="form-field">
-                <label htmlFor="contact-email">Email address</label>
-                <input
-                  id="contact-email"
-                  type="email"
-                  required
-                  value={formData.email}
-                  onChange={(e) =>
-                    setFormData((p) => ({ ...p, email: e.target.value }))
-                  }
-                  placeholder="jane@brand.com"
-                />
-              </div>
-              <div className="form-field">
-                <label htmlFor="contact-service">
-                  What are you looking for?
-                </label>
-                <select
-                  id="contact-service"
-                  value={formData.service}
-                  onChange={(e) =>
-                    setFormData((p) => ({ ...p, service: e.target.value }))
-                  }
-                >
-                  <option value="">Select a service</option>
-                  <option value="UGC Video Creation">
-                    UGC Video Creation
-                  </option>
-                  <option value="Product & Lifestyle Photography">
-                    Product & Lifestyle Photography
-                  </option>
-                  <option value="Creative Content Package">
-                    Creative Content Package
-                  </option>
-                  <option value="Something else">Something else</option>
-                </select>
-              </div>
-            </div>
-            <div className="form-field form-field--full">
-              <label htmlFor="contact-message">
-                Tell me about your project
-              </label>
-              <textarea
-                id="contact-message"
-                rows={5}
-                value={formData.message}
-                onChange={(e) =>
-                  setFormData((p) => ({ ...p, message: e.target.value }))
-                }
-                placeholder="Share a bit about your brand and what you're looking for…"
-              />
-            </div>
-            <button type="submit" className="contact-submit">
-              Let's Collaborate ↗
-            </button>
-            <p className="contact-alt">
-              Or say hello directly at{" "}
-              <a href="mailto:hello@aureabiazon.com">hello@aureabiazon.com</a>
-            </p>
-          </form>
-        </div>
-      </section>
+      <EditorialContact />
 
       {/* ================================================================== */}
       {/* FOOTER                                                             */}
       {/* ================================================================== */}
       <footer className="site-footer">
         <div className="footer-inner">
-          <p className="footer-brand">AUREA BIAZON</p>
-          <nav className="footer-links" aria-label="Footer">
-            <a
-              href="https://instagram.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Instagram
-            </a>
-            <a
-              href="https://tiktok.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              TikTok
-            </a>
-            <a href="#contact">Contact</a>
-          </nav>
+          <div className="footer-brand-col">
+            <p className="footer-brand">AUREA BIAZON</p>
+            <p className="footer-tagline">Visual storytelling & authentic UGC creation.</p>
+            <p className="footer-bio">
+              Elevated UGC and visual storytelling for beauty, skincare, and modern lifestyle brands.
+            </p>
+          </div>
+
+          <div className="footer-nav-col">
+            <p className="footer-col-title">NAVIGATION</p>
+            <nav className="footer-nav-links" aria-label="Footer Navigation">
+              <a href="#work">Work</a>
+              <a href="#selected-work">Selected Work</a>
+              <a href="#about">About</a>
+              <a href="#rates">Rates</a>
+              <a href="#contact">Contact</a>
+            </nav>
+          </div>
+
+          <div className="footer-social-col">
+            <p className="footer-col-title">CONNECT</p>
+            <div className="footer-social-stack">
+              <a
+                href="https://instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer-social-link"
+              >
+                <svg
+                  className="footer-social-icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.6"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                  <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+                </svg>
+                <span>Instagram</span>
+              </a>
+
+              <a
+                href="https://tiktok.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer-social-link"
+              >
+                <svg
+                  className="footer-social-icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.6"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
+                </svg>
+                <span>TikTok</span>
+              </a>
+
+              <a
+                href="https://pinterest.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer-social-link"
+                title="Pinterest profile"
+              >
+                <svg
+                  className="footer-social-icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.6"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <line x1="8" y1="20" x2="12" y2="11" />
+                  <path d="M10.7 14c.45 1.25 1.45 2 2.55 2 2.1 0 3.75-1.55 3.75-4a5 5 0 1 0-9.7 1.7" />
+                  <circle cx="12" cy="12" r="9" />
+                </svg>
+                <span>Pinterest</span>
+              </a>
+
+              <a
+                href="mailto:hello@aureabiazon.com"
+                className="footer-social-link"
+                title="Send an email"
+              >
+                <svg
+                  className="footer-social-icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.6"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <rect width="20" height="16" x="2" y="4" rx="2" />
+                  <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                </svg>
+                <span>Email</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div className="footer-bottom">
           <p className="footer-copy">
             © {new Date().getFullYear()} Aurea Biazon. All rights reserved.
           </p>
-          <a href="#work" className="footer-top" aria-label="Back to top">
-            ↑ Top
-          </a>
         </div>
       </footer>
 

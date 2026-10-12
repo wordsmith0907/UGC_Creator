@@ -133,36 +133,6 @@ export const workProjects: WorkProject[] = [
     isPlaceholder: true,
     source: "Pexels / Monstera Production",
   },
-  {
-    id: "work-07",
-    number: "07",
-    title: "Morning Rituals",
-    category: "Food & Beverage",
-    description:
-      "Inviting textures, warm steam, and thoughtful coffee table aesthetics.",
-    image:
-      "https://images.pexels.com/photos/302899/pexels-photo-302899.jpeg?auto=compress&cs=tinysrgb&w=800",
-    video: "/ringview/3.mp4",
-    poster: "/ringview/3-poster.jpg",
-    alt: "Pour-over coffee in warm ambient morning sunlight",
-    isPlaceholder: true,
-    source: "Pexels / Chevanon Photography",
-  },
-  {
-    id: "work-08",
-    number: "08",
-    title: "Warm Minimal",
-    category: "Beauty · Self-Care",
-    description:
-      "Clean visual narratives centered on daily nourishment and mindful routines.",
-    image:
-      "https://images.pexels.com/photos/3785147/pexels-photo-3785147.jpeg?auto=compress&cs=tinysrgb&w=800",
-    video: "/ringview/5.mp4",
-    poster: "/ringview/5-poster.jpg",
-    alt: "Clean beauty serum droplets on glass dish with natural highlights",
-    isPlaceholder: true,
-    source: "Pexels / Karolina Kaboompics",
-  },
 ];
 
 // =============================================================================
@@ -171,17 +141,17 @@ export const workProjects: WorkProject[] = [
 export const aboutAssets = {
   primary: {
     image:
-      "https://images.pexels.com/photos/3760263/pexels-photo-3760263.jpeg?auto=compress&cs=tinysrgb&w=1200",
-    alt: "Editorial portrait of a creative professional in natural light",
+      "https://images.pexels.com/photos/1382730/pexels-photo-1382730.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    alt: "Editorial portrait of Aurea Biazon in warm natural light",
     isPlaceholder: true,
-    source: "Pexels / Andrea Piacquadio",
+    source: "Pexels / Tuấn Kiệt Jr.",
   },
   secondary: {
     image:
-      "https://images.pexels.com/photos/3584996/pexels-photo-3584996.jpeg?auto=compress&cs=tinysrgb&w=600",
-    alt: "Creative workspace with camera and styling tools",
+      "https://images.pexels.com/photos/1382732/pexels-photo-1382732.jpeg?auto=compress&cs=tinysrgb&w=800",
+    alt: "Creative lifestyle and botanical styling details",
     isPlaceholder: true,
-    source: "Pexels / George Milton",
+    source: "Pexels / Tuấn Kiệt Jr.",
   },
 };
 
