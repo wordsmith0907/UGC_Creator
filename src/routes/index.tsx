@@ -760,7 +760,7 @@ function HomePage() {
           </div>
           <div className="about-text">
             <p className="about-eyebrow-new reveal-on-scroll">
-              02 / BEHIND THE FRAME
+              BEHIND THE FRAME
             </p>
             <h2 className="about-heading-new reveal-on-scroll" id="about-h">
               Not just content.
