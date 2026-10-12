@@ -403,10 +403,14 @@ function HomePage() {
     if (track) {
       const animations = track.getAnimations();
       animations.forEach((anim) => {
-        if ("updatePlaybackRate" in anim) {
-          anim.updatePlaybackRate(0.7);
-        } else {
-          anim.playbackRate = 0.7;
+        const a = anim as unknown as {
+          updatePlaybackRate?: (rate: number) => void;
+          playbackRate?: number;
+        };
+        if (typeof a.updatePlaybackRate === "function") {
+          a.updatePlaybackRate(0.7);
+        } else if (typeof a.playbackRate === "number") {
+          a.playbackRate = 0.7;
         }
       });
     }
@@ -418,10 +422,14 @@ function HomePage() {
     if (track) {
       const animations = track.getAnimations();
       animations.forEach((anim) => {
-        if ("updatePlaybackRate" in anim) {
-          anim.updatePlaybackRate(1);
-        } else {
-          anim.playbackRate = 1;
+        const a = anim as unknown as {
+          updatePlaybackRate?: (rate: number) => void;
+          playbackRate?: number;
+        };
+        if (typeof a.updatePlaybackRate === "function") {
+          a.updatePlaybackRate(1);
+        } else if (typeof a.playbackRate === "number") {
+          a.playbackRate = 1;
         }
       });
     }
