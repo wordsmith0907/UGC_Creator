@@ -556,17 +556,17 @@
 
 .sw-card {
   flex-shrink: 0;
-  width: clamp(320px, 44vh, 440px);
   display: flex;
   flex-direction: column;
   gap: 16px;
+  width: auto;
 }
 
 .sw-card-media {
   position: relative;
-  width: 100%;
+  height: clamp(380px, 52vh, 500px);
   aspect-ratio: 4 / 5;
-  max-height: 55vh;
+  width: auto;
   border-radius: 14px;
   overflow: hidden;
   cursor: pointer;
@@ -1487,32 +1487,36 @@
 
 .lightbox-media-wrap {
   position: relative;
-  max-height: 78vh;
+  max-height: 82vh;
+  max-width: 90vw;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 14px;
   overflow: hidden;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.55);
   background: black;
 }
 
 .lightbox-img {
-  max-width: 85vw;
-  max-height: 78vh;
+  max-width: min(88vw, 900px);
+  max-height: 80vh;
+  width: auto;
+  height: auto;
   object-fit: contain;
   display: block;
   border-radius: 14px;
 }
 
 .lightbox-video {
-  max-width: 85vw;
-  max-height: 78vh;
-  aspect-ratio: 4 / 5;
+  max-width: min(88vw, 420px);
+  max-height: 80vh;
+  aspect-ratio: 9 / 16;
   object-fit: contain;
   display: block;
   border-radius: 14px;
   outline: none;
+  background: black;
 }
 
 .lightbox-info {
