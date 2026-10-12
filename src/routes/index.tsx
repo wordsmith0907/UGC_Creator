@@ -890,7 +890,7 @@ function HomePage() {
                 }
               }}
             >
-              EXPLORE MY WORK
+              EXPLORE MY WORK →
             </a>
           </div>
         </div>

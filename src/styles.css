@@ -912,47 +912,31 @@
 }
 
 .about-cta {
-  position: relative;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 24px;
   font-size: 0.75rem;
   font-weight: 500;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--foreground);
   text-decoration: none;
-  padding: 8px 0 4px 0;
-  width: fit-content;
+  border: 1px solid var(--foreground);
+  border-radius: 9999px;
+  background: color-mix(in oklch, var(--background) 90%, transparent);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: pointer;
+  width: fit-content;
+  margin-top: 10px;
 }
 
-/* Subtle resting baseline underline */
-.about-cta::before {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 1px;
-  background-color: color-mix(in oklch, var(--foreground) 35%, transparent);
-}
-
-/* Horizontal wipe / reveal active underline */
-.about-cta::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 1px;
-  background-color: var(--foreground);
-  transform: scaleX(0);
-  transform-origin: right;
-  transition: transform 350ms cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-.about-cta:hover::after {
-  transform: scaleX(1);
-  transform-origin: left;
+.about-cta:hover {
+  background: var(--foreground);
+  color: var(--background);
+  transform: translateY(-1px);
 }
 
 .about-cta:focus-visible {
@@ -961,9 +945,9 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .about-cta::after {
+  .about-cta {
     transition: none;
-    transform: scaleX(1);
+    transform: none !important;
   }
 }
 
