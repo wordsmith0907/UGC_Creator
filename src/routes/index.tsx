@@ -1112,6 +1112,17 @@ function HomePage() {
           <p className="footer-copy">
             © {new Date().getFullYear()} Aurea Biazon. All rights reserved.
           </p>
+          <p className="footer-credit">
+            Crafted by{" "}
+            <a
+              href="https://www.designmela.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="footer-credit-link"
+            >
+              Designmela
+            </a>
+          </p>
         </div>
       </footer>
 
