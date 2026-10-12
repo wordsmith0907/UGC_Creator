@@ -2076,13 +2076,16 @@
 
 .footer-credit {
   font-size: 0.6875rem;
-  letter-spacing: 0.08em;
-  color: color-mix(in oklch, var(--background) 40%, transparent);
+  color: color-mix(in oklch, var(--background) 45%, transparent);
   margin: 0;
 }
 
+.footer-credit-label {
+  opacity: 0.7;
+}
+
 .footer-credit-link {
-  color: color-mix(in oklch, var(--background) 55%, transparent);
+  color: color-mix(in oklch, var(--background) 45%, transparent);
   text-decoration: none;
   border-bottom: 1px solid color-mix(in oklch, var(--background) 25%, transparent);
   transition: color 0.2s ease, border-color 0.2s ease;

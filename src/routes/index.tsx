@@ -1113,7 +1113,7 @@ function HomePage() {
             © {new Date().getFullYear()} Aurea Biazon. All rights reserved.
           </p>
           <p className="footer-credit">
-            Crafted by{" "}
+            <span className="footer-credit-label">Crafted by </span>
             <a
               href="https://www.designmela.com"
               target="_blank"
