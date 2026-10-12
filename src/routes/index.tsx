@@ -863,8 +863,22 @@ function HomePage() {
                 into focus in a way that feels authentic to the people watching.
               </p>
             </div>
-            <a href="#selected-work" className="about-cta reveal-on-scroll">
-              Explore My Work ↗
+            <a
+              href="#selected-work"
+              className="about-cta reveal-on-scroll"
+              onClick={(e) => {
+                const target =
+                  window.innerWidth < 768
+                    ? document.querySelector(".sw-mobile-section")
+                    : document.getElementById("selected-work");
+                if (target) {
+                  e.preventDefault();
+                  target.scrollIntoView({ behavior: "smooth" });
+                  window.history.pushState(null, "", "#selected-work");
+                }
+              }}
+            >
+              EXPLORE MY WORK
             </a>
           </div>
         </div>
